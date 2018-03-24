@@ -4,12 +4,11 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.hoyeonlee.imaginecup.BackActionBarActivity;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
 import com.example.hoyeonlee.imaginecup.R;
 import com.example.hoyeonlee.imaginecup.Utils.ModelLoadTask;
@@ -24,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ViewerActivity extends AppCompatActivity {
+public class ViewerActivity extends BackActionBarActivity {
     private _Application app;
     private ViewGroup containerView;
     private ProgressBar progressBar;
@@ -32,14 +31,19 @@ public class ViewerActivity extends AppCompatActivity {
     private ModelLoadTask modelLoadTask;
     ApiService apiService;
     private String modelUrl = null;
+    private boolean isFirstCall = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
+
+        setToolbar();
+        setTitle(getResources().getString(R.string.text_history));
+
         app = _Application.getInstance();
         containerView = findViewById(R.id.container_view);
         progressBar = findViewById(R.id.model_progress_bar);
-        progressBar.setVisibility(View.GONE);
+
         modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
         //Progress Dialog Create
         progressDiaglog=new ProgressDialog(ViewerActivity.this);
@@ -80,18 +84,18 @@ public class ViewerActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BodyInfo> call, Throwable t) {
                 Toast.makeText(app, "SERVER ERROR", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        modelLoadTask.createNewModelView(app.getCurrentModel());
-        if (app.getCurrentModel() != null) {
-            setTitle(app.getCurrentModel().getTitle());
+        if(!isFirstCall){
+            modelLoadTask.createNewModelView(modelLoadTask.getCurrentModel());
         }
+        isFirstCall = false;
     }
 
     @Override

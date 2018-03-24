@@ -28,7 +28,7 @@ import retrofit2.Response;
  * Created by hoyeonlee on 2018. 2. 23..
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class SigninActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button loginButton;
     Button signupButton;
@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signin);
         loginButton = (Button) findViewById(R.id.btn_login);
         signupButton = findViewById(R.id.btn_join);
         emailInput = findViewById(R.id.input_email);
@@ -64,12 +64,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             finish();
                         }
-                        else Toast.makeText(LoginActivity.this, "Login Error. Try again!!", Toast.LENGTH_SHORT).show();
+                        else Toast.makeText(SigninActivity.this, "Login Error. Try again!!", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Call<LoginResult> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SigninActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                 }
             });
 

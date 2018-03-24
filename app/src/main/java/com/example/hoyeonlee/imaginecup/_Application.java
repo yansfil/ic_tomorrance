@@ -2,12 +2,10 @@ package com.example.hoyeonlee.imaginecup;
 
 import android.app.Application;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 
 import com.example.hoyeonlee.imaginecup.Network.AddCookiesInterceptor;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
 import com.example.hoyeonlee.imaginecup.Network.ReceivedCookiesInterceptor;
-import com.example.hoyeonlee.imaginecup.ViewModel.Model;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -22,7 +20,6 @@ public class _Application extends Application{
     private static _Application appInstance;
     Retrofit retrofit;
     ApiService apiService = null;
-    Model currentModel;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -68,15 +65,5 @@ public class _Application extends Application{
         }
       return apiService;
     }
-
-    @Nullable
-    public Model getCurrentModel() {
-        return currentModel;
-    }
-
-    public void setCurrentModel(@Nullable Model model) {
-        currentModel = model;
-    }
-
 
 }

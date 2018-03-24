@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity
     LinearLayout exerciseLayout;
     QrScanDialog dialog;
     private int weight = 0;
-    private boolean isFirst = false;
+    private String goal = "";
+    private String intensity = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +95,7 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferenceBase.putSharedPreference("height",mainData.getUser().getHeight().toString());
                 setUserInfo();
                 //If user access first time, provide a QR SCAN dialog
-                if(mainData.getIsfirst() == 1){
-                    isFirst = true;
+                if(mainData.getIsfirst() == 0){
                     dialog = new QrScanDialog(MainActivity.this);
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -127,6 +127,10 @@ public class MainActivity extends AppCompatActivity
     }
     public void setWeight(int weight){
         this.weight = weight;
+    }
+    public void setGoal(String goal,String intensity){
+        this.goal = goal;
+        this.intensity = intensity;
     }
 
     private void setUserInfo(){

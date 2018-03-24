@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.hoyeonlee.imaginecup.Login.LoginActivity;
+import com.example.hoyeonlee.imaginecup.Login.SigninActivity;
 
 /**
  * Created by hoyeonlee on 2018. 3. 24..
@@ -26,7 +26,7 @@ public class StaticFunctions {
 
     public void goFirstPage(){
         Toast.makeText(context, "SESSION OUTDATED. PLEASE LOGIN AGAIN", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, SigninActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

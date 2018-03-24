@@ -23,7 +23,6 @@ import com.example.hoyeonlee.imaginecup.ViewModel.obj.ObjModel;
 import com.example.hoyeonlee.imaginecup.ViewModel.ply.PlyModel;
 import com.example.hoyeonlee.imaginecup.ViewModel.stl.StlModel;
 import com.example.hoyeonlee.imaginecup.ViewModel.util.Util;
-import com.example.hoyeonlee.imaginecup._Application;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -43,7 +42,7 @@ public class ModelLoadTask extends AsyncTask<Uri, Integer, Model> {
     ProgressBar progressBar;
     public ModelSurfaceView modelView;
     private ViewGroup containerView;
-
+    private Model currentModel;
     public ModelLoadTask(Context context, ProgressBar progressBar, ViewGroup containerView){
         this.context = context;
         this.progressBar = progressBar;
@@ -51,6 +50,7 @@ public class ModelLoadTask extends AsyncTask<Uri, Integer, Model> {
     }
 
     protected Model doInBackground(Uri... file) {
+        progressBar.setVisibility(View.VISIBLE);
         InputStream stream = null;
         try {
             Uri uri = file[0];
@@ -113,17 +113,22 @@ public class ModelLoadTask extends AsyncTask<Uri, Integer, Model> {
     }
     public void createNewModelView(@Nullable Model model) {
         containerView.removeAllViews();
-        _Application.getInstance().setCurrentModel(model);
         modelView = new ModelSurfaceView(context, model);
         containerView.addView(modelView, 0);
     }
     public void setCurrentModel(@NonNull Model model) {
+        currentModel = model;
         createNewModelView(model);
         Toast.makeText(context, R.string.open_model_success, Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.GONE);
     }
+    @Nullable
+    public Model getCurrentModel() {
+        return currentModel;
+    }
 
     public void loadCurrentModel(@NonNull File modelFile) {
+        progressBar.setVisibility(View.VISIBLE);
         try {
             InputStream stream = new FileInputStream(modelFile);
             setCurrentModel(new ObjModel(stream));

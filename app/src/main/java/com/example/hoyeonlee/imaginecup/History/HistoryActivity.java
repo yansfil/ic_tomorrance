@@ -41,6 +41,7 @@ public class HistoryActivity extends BackActionBarActivity {
     private ProgressBar progressBar;
     private ModelLoadTask modelLoadTask;
     private ArrayList<String> modelUrlList = new ArrayList<>();
+    boolean isFirstCall= true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,6 @@ public class HistoryActivity extends BackActionBarActivity {
 
         containerView = findViewById(R.id.container_view);
         progressBar = findViewById(R.id.model_progress_bar);
-        progressBar.setVisibility(View.GONE);
         modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
         app = _Application.getInstance();
 
@@ -80,6 +80,7 @@ public class HistoryActivity extends BackActionBarActivity {
             @Override
             public void onFailure(Call<BodyInfos> call, Throwable t) {
                 Toast.makeText(HistoryActivity.this, "SERVER ERROR", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         //set DateSpinner
@@ -100,10 +101,10 @@ public class HistoryActivity extends BackActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        modelLoadTask.createNewModelView(app.getCurrentModel());
-        if (app.getCurrentModel() != null) {
-            setTitle(app.getCurrentModel().getTitle());
+        if(!isFirstCall){
+            modelLoadTask.createNewModelView(modelLoadTask.getCurrentModel());
         }
+        isFirstCall = false;
     }
 
     @Override
