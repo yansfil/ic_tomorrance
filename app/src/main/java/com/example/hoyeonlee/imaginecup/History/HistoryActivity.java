@@ -1,52 +1,92 @@
 package com.example.hoyeonlee.imaginecup.History;
 
-import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.BackActionBarActivity;
+import com.example.hoyeonlee.imaginecup.Network.ApiService;
 import com.example.hoyeonlee.imaginecup.R;
-import com.example.hoyeonlee.imaginecup.databinding.ActivityHistoryBinding;
+import com.example.hoyeonlee.imaginecup.Utils.ModelLoadTask;
+import com.example.hoyeonlee.imaginecup.Utils.StaticFunctions;
+import com.example.hoyeonlee.imaginecup.ViewModel.DownloadFilesTask;
+import com.example.hoyeonlee.imaginecup._Application;
+import com.example.hoyeonlee.imaginecup.data.BodyInfos;
+import com.example.hoyeonlee.imaginecup.data.Item;
 
-import java.util.Arrays;
+import org.angmarch.views.NiceSpinner;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-//데이터 바인딩 간단 사용
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class HistoryActivity extends BackActionBarActivity {
 
-    ActivityHistoryBinding layout;
-    public String date = "날짜 : 2018-02-21";
-    public String shape = "타입 : 하체발달형";
-    public String tall = "키 : 172cm";
-    public String weight = "몸무게 : 78kg";
+    NiceSpinner dateSpinner;
+    List<String> dateSet;
+    BodyInfos bodyInfos;
+    ApiService apiService;
+    _Application app;
+    private ViewGroup containerView;
+    private ProgressBar progressBar;
+    private ModelLoadTask modelLoadTask;
+    private ArrayList<String> modelUrlList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        layout = DataBindingUtil.setContentView(this,R.layout.activity_history);
+        setContentView(R.layout.activity_history);
         setToolbar();
         setTitle(getResources().getString(R.string.text_history));
-        layout.setActivity(this);
-        final List<String> dataset = new LinkedList<>(Arrays.asList("2018-02-21", "2018-01-21", "2017-12-21", "2017-11-21", "2017-10-21"));
-        layout.spinnerDate.attachDataSource(dataset);
-        layout.spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        containerView = findViewById(R.id.container_view);
+        progressBar = findViewById(R.id.model_progress_bar);
+        progressBar.setVisibility(View.GONE);
+        modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
+        app = _Application.getInstance();
+
+        dateSet = new LinkedList<>();
+        dateSpinner = findViewById(R.id.spinner_date);
+        apiService = _Application.getInstance().getApiService();
+
+        apiService.getAllInfo().enqueue(new Callback<BodyInfos>() {
+            @Override
+            public void onResponse(Call<BodyInfos> call, Response<BodyInfos> response) {
+                if(response.code() == 401){
+                    StaticFunctions.getInstance(HistoryActivity.this).goFirstPage();
+                    return;
+                }
+                bodyInfos = response.body();
+                if(bodyInfos.getCode() == 1){
+                    for(Item item : bodyInfos.getItems()){
+                        dateSet.add(item.getTimestamp());
+                    }
+                }else
+                    Toast.makeText(HistoryActivity.this, "SERVER ERROR", Toast.LENGTH_SHORT).show();
+                //put dates into Spinner
+                dateSpinner.attachDataSource(dateSet);
+                modelLoad(0);
+            }
+
+            @Override
+            public void onFailure(Call<BodyInfos> call, Throwable t) {
+                Toast.makeText(HistoryActivity.this, "SERVER ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //set DateSpinner
+        dateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                date = "날짜 : "+dataset.get(position);
-                if(position == 1){
-                    weight = "몸무게 : 83kg";
-                }else if(position == 2){
-                    weight = "몸무게 : 87kg";
-                }
-                layout.setActivity(HistoryActivity.this);
-                layout.webView.loadUrl("http://34.212.159.48/view/45");
-
+                modelLoad(position);
             }
 
             @Override
@@ -54,32 +94,47 @@ public class HistoryActivity extends BackActionBarActivity {
 
             }
         });
-        settingWebView("http://34.212.159.48/view/45");
     }
 
-    void settingWebView(String url){
-        WebSettings webSettings = layout.webView.getSettings();
-        webSettings.setSupportZoom(false);
-        webSettings.setDisplayZoomControls(false);
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        layout.webView.setVerticalScrollBarEnabled(true);
-        layout.webView.setHorizontalScrollBarEnabled(true);
-        if(Build.VERSION.SDK_INT >= 21){
-            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        layout.webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-            }
-        });
-        layout.webView.loadUrl(url);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        modelLoadTask.createNewModelView(app.getCurrentModel());
+        if (app.getCurrentModel() != null) {
+            setTitle(app.getCurrentModel().getTitle());
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (modelLoadTask.modelView != null) {
+            modelLoadTask.modelView.onPause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (modelLoadTask.modelView!= null) {
+            modelLoadTask.modelView.onResume();
+        }
+    }
+
+    private void modelLoad(int position){
+        Uri modelUrl = Uri.parse(bodyInfos.getItems().get(position).getModel());
+        File path= getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        File outputFile= new File(path, modelLoadTask.getFileName(modelUrl)); //파일명까지 포함함 경로의 File 객체 생성
+        if(outputFile.exists()){
+            modelLoadTask.loadCurrentModel(outputFile);
+            return;
+        }
+        modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
+        // a model in network --> view
+        modelLoadTask.execute(modelUrl);
+        //a model in network --> directory
+        DownloadFilesTask downloadTask = new DownloadFilesTask(HistoryActivity.this);
+        downloadTask.execute(bodyInfos.getItems().get(position).getModel());
     }
 }

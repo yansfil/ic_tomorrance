@@ -3,14 +3,16 @@ package com.example.hoyeonlee.imaginecup.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Body {
+import java.util.ArrayList;
+
+public class BodyInfos {
 
     @SerializedName("code")
     @Expose
     private Integer code;
-    @SerializedName("item")
+    @SerializedName("items")
     @Expose
-    private Item item;
+    private ArrayList<Item> items;
 
     public Integer getCode() {
         return code;
@@ -20,12 +22,12 @@ public class Body {
         this.code = code;
     }
 
-    public Item getItem() {
-        return item;
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 
 }

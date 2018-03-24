@@ -1,6 +1,7 @@
 package com.example.hoyeonlee.imaginecup.Network;
 
-import com.example.hoyeonlee.imaginecup.data.Body;
+import com.example.hoyeonlee.imaginecup.data.BodyInfo;
+import com.example.hoyeonlee.imaginecup.data.BodyInfos;
 import com.example.hoyeonlee.imaginecup.data.LoginResult;
 import com.example.hoyeonlee.imaginecup.data.Main;
 
@@ -16,7 +17,7 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
-    public static final String URL = "http://192.168.20.231:3000";
+    public static final String URL = "http://172.24.127.39:3000";
     @FormUrlEncoded
     @POST("/client/login")
     Call<LoginResult> login(@Field("email") String email, @Field("password") String password, @Field("pushid") String clientId);
@@ -37,8 +38,11 @@ public interface ApiService {
 
 
     @GET("/client/recent-info")
-    Call<Body> getBodyInfo();
+    Call<BodyInfo> getRecentInfo();
+
+    @GET("/client/all-info")
+    Call<BodyInfos> getAllInfo();
 
     @GET("/client/bodySize")
-    Call<Body> getBodySize();
+    Call<BodyInfo> getBodySize();
 }

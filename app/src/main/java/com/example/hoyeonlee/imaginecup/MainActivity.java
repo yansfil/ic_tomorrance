@@ -2,6 +2,7 @@ package com.example.hoyeonlee.imaginecup;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.Exercise.ExerciseActivity;
@@ -26,7 +28,7 @@ import com.example.hoyeonlee.imaginecup.Network.SharedPreferenceBase;
 import com.example.hoyeonlee.imaginecup.QrScan.QrScanDialog;
 import com.example.hoyeonlee.imaginecup.QrScan.barcode.BarcodeCaptureActivity;
 import com.example.hoyeonlee.imaginecup.Utils.StaticFunctions;
-import com.example.hoyeonlee.imaginecup.ViewModel.ModelViewActivity;
+import com.example.hoyeonlee.imaginecup.ViewModel.ViewerActivity;
 import com.example.hoyeonlee.imaginecup.data.Main;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -90,12 +92,18 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferenceBase.putSharedPreference("name",mainData.getUser().getName());
                 SharedPreferenceBase.putSharedPreference("email",mainData.getUser().getEmail());
                 SharedPreferenceBase.putSharedPreference("height",mainData.getUser().getHeight().toString());
-
+                setUserInfo();
                 //If user access first time, provide a QR SCAN dialog
-                if(mainData.getIsfirst() == 0){
+                if(mainData.getIsfirst() == 1){
                     isFirst = true;
                     dialog = new QrScanDialog(MainActivity.this);
                     dialog.setCanceledOnTouchOutside(false);
+                    dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            MainActivity.this.finish();
+                        }
+                    });
                     dialog.show();
                 }
 
@@ -111,10 +119,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(isFirst){
-            dialog.dismiss();
-            MainActivity.this.finish();
-        }
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -123,6 +127,13 @@ public class MainActivity extends AppCompatActivity
     }
     public void setWeight(int weight){
         this.weight = weight;
+    }
+
+    private void setUserInfo(){
+        String name = SharedPreferenceBase.getSharedPreference("name","NONE");
+        String email= SharedPreferenceBase.getSharedPreference("email","NONE");
+        ((TextView)findViewById(R.id.tv_name)).setText(name);
+        ((TextView)findViewById(R.id.tv_email)).setText(email);
     }
 
     @Override
@@ -156,6 +167,7 @@ public class MainActivity extends AppCompatActivity
         } else
             super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 
 
@@ -235,8 +247,9 @@ public class MainActivity extends AppCompatActivity
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
     private void goModelActivity(){
-        Intent intent = new Intent(MainActivity.this,ModelViewActivity.class);
+        Intent intent = new Intent(MainActivity.this,ViewerActivity.class);
         startActivity(intent);
     }
     private void goHistoryActivity(){

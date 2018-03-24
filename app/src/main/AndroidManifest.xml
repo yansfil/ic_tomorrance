@@ -23,11 +23,7 @@
         tools:replace="android:icon"
         android:theme="@style/NoActionBar">
         <activity android:name=".Login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".Login.SignUpActivity">
@@ -82,7 +78,13 @@
 
 
 
-        <activity android:name=".History.HistoryActivity" />
+        <activity android:name=".History.HistoryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Measure.MeasureActivity" />
         <activity android:name=".Exercise.ExerciseActivity" />
         <activity android:name=".Notification.NotiTestActivity">

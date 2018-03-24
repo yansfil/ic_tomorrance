@@ -23,7 +23,7 @@ public class ModelViewActivity extends BackActionBarActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_model);
+        setContentView(R.layout.activity_viewer);
         setToolbar();
         setTitle(getResources().getString(R.string.text_model));
         progressBar=new ProgressDialog(ModelViewActivity.this);

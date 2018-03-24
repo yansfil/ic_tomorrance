@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="activity"
-            type="com.example.hoyeonlee.imaginecup.History.HistoryActivity"/>
-    </data>
-<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.hoyeonlee.imaginecup.History.HistoryActivity">
+    android:layout_height="match_parent">
     <include
         layout="@layout/toolbar"
         android:layout_width="0dp"
@@ -55,12 +47,19 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_date">
 
-            <WebView
-                android:id="@+id/webView"
+            <FrameLayout
+                android:id="@+id/container_view"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp" />
+                android:layout_marginTop="0dp">
+                <ProgressBar
+                    android:id="@+id/model_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_gravity="top|end"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,34 +71,29 @@
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{activity.date}" />
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/tv_shape"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{activity.shape}"/>
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:id="@+id/tv_tall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{activity.tall}" />
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:id="@+id/tv_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@{activity.weight}" />
+                    android:layout_marginBottom="10dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
 
 </android.support.constraint.ConstraintLayout>
-</layout>
