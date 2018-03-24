@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.hoyeonlee.imaginecup"
+    xmlns:tools="http://schemas.android.com/tools">
+    <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    <!-- 인터넷 연결 허용하는 퍼미션 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- SD카드 기록 허용하는 퍼미션 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- SD카드 읽기 허용하는 퍼미션, 킷캣이후로는 필요없음 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- CPU 상태 유지 및 화면 꺼짐 제어를 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <application
+        android:name="._Application"
+        android:allowBackup="true"
+        android:icon="@drawable/main_view"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:replace="android:icon"
+        android:theme="@style/NoActionBar">
+        <activity android:name=".Login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Login.SignUpActivity">
+        </activity>
+        <activity
+            android:name=".MainActivity">
+
+
+        </activity>
+        <activity android:name=".ViewModel.ModelViewActivity">
+
+        </activity>
+        <activity android:name=".ViewModel.ViewerActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern=".*\\.stl"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern=".*\\.stl"
+                    android:scheme="https" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern=".*\\.stl"
+                    android:scheme="content" />
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:pathPattern=".*\\.stl"
+                    android:scheme="file" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/stl"/>
+                <data android:mimeType="application/x-stl"/>
+                <data android:mimeType="application/octet-stream" android:scheme="content"/>
+            </intent-filter>
+        </activity>
+        <activity
+        android:name=".QrScan.barcode.BarcodeCaptureActivity"
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+
+
+        <activity android:name=".History.HistoryActivity" />
+        <activity android:name=".Measure.MeasureActivity" />
+        <activity android:name=".Exercise.ExerciseActivity" />
+        <activity android:name=".Notification.NotiTestActivity">
+        </activity>
+
+
+        <service android:name=".Notification.MyInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Notification.RegistrationIntentService"
+            android:exported="false">
+        </service>
+        <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.hoyeonlee.imaginecup" />
+            </intent-filter>
+        </receiver>
+
+
+        <uses-library android:name="com.sec.android.app.multiwindow" android:required="false" />
+        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+</manifest>

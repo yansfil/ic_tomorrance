@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4ab9ba</color>
+    <color name="colorPrimary_pink">#fb7b69</color>
+    <color name="colorPrimary_green">#30cdc8</color>
+    <color name="colorPrimary_gray">#eeeeee</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--customize-->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#dddddd</color>
+    <color name="textgray">#c4c4c4</color>
+    <color name="inputdisable">#f7f7f7</color>
+    <color name="red">#ff3b30</color>
+    <color name="transparent">#00ff0000</color>
+    <color name="line_color">#dbdbdb</color>
+    <color name="text_color">#333333</color>
+    <color name="text_color_soft">#555555</color>
+    <color name="text_color_very_soft">#888888</color>
+    <color name="greeny_blue">#4ab9ba</color>
+    <color name="pale_grey">#ebf7f6</color>
+    <color name="semi_greeny">#42b8b9</color>
+</resources>

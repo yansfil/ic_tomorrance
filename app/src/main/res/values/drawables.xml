@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item name="ic_menu_body" type="drawable">@drawable/ic_body</item>
+    <item name="ic_menu_measure" type="drawable">@drawable/ic_measuring</item>
+    <item name="ic_menu_exercise" type="drawable">@drawable/ic_exercise</item>
+    <item name="ic_menu_history" type="drawable">@drawable/ic_history</item>
+    <item name="ic_menu_share" type="drawable">@android:drawable/ic_menu_share</item>
+    <item name="ic_menu_send" type="drawable">@android:drawable/ic_menu_send</item>
+</resources>

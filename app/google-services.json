@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "596996598067",
+    "firebase_url": "https://imaginecup-393a6.firebaseio.com",
+    "project_id": "imaginecup-393a6",
+    "storage_bucket": "imaginecup-393a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596996598067:android:ceb68308db8a426f",
+        "android_client_info": {
+          "package_name": "com.example.hoyeonlee.imaginecup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596996598067-f75fjlfvedq567noulbesg9u9tpo3tbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hoyeonlee.imaginecup",
+            "certificate_hash": "02f2d74ed4788ea6b68b0451df41cbfc95ee9185"
+          }
+        },
+        {
+          "client_id": "596996598067-llbha9ocdps63hi1ne4s8gi3rk991kli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJA2YhMS87f3vzmZg8Egql78R0nhvSJr0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596996598067-llbha9ocdps63hi1ne4s8gi3rk991kli.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596996598067:android:7558e0fe67c4b916",
+        "android_client_info": {
+          "package_name": "com.example.hoyeonlee.retrofitExample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596996598067-llbha9ocdps63hi1ne4s8gi3rk991kli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJA2YhMS87f3vzmZg8Egql78R0nhvSJr0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
