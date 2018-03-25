@@ -24,7 +24,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/client/join")
-    Call<LoginResult> join(@Field("name") String name,@Field("height") String height, @Field("email") String email, @Field("password") String password,@Field("pushid") String clientId);
+    Call<LoginResult> join(@Field("name") String name,@Field("height") String height, @Field("email") String email, @Field("password") String password,@Field("goal") String goal,@Field("intensity") String intensity,@Field("pushid") String clientId);
 
     @FormUrlEncoded
     @POST("/client/reservation")

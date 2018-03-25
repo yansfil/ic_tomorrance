@@ -2,7 +2,6 @@ package com.example.hoyeonlee.imaginecup;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -43,11 +42,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
-    public static final int BARCODE_READER_REQUEST_CODE = 1000;
+    public static final int BARCODE_READER_REQUEST_CODE = 9001;
     LinearLayout modelLayout;
     LinearLayout historyLayout;
     LinearLayout measureLayout;
     LinearLayout exerciseLayout;
+    LinearLayout scanLayout;
     QrScanDialog dialog;
     private int weight = 0;
     private String goal = "";
@@ -73,12 +73,14 @@ public class MainActivity extends AppCompatActivity
         historyLayout = findViewById(R.id.layout_history);
         measureLayout = findViewById(R.id.layout_measure);
         exerciseLayout = findViewById(R.id.layout_exercise);
+        scanLayout = findViewById(R.id.layout_scan);
 
         //Set EventListener
         modelLayout.setOnClickListener(this);
         historyLayout.setOnClickListener(this);
         measureLayout.setOnClickListener(this);
         exerciseLayout.setOnClickListener(this);
+        scanLayout.setOnClickListener(this);
 
         //Get Main Info
         ApiService apiService = _Application.getInstance().getApiService();
@@ -95,15 +97,10 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferenceBase.putSharedPreference("height",mainData.getUser().getHeight().toString());
                 setUserInfo();
                 //If user access first time, provide a QR SCAN dialog
-                if(mainData.getIsfirst() == 0){
+                if(mainData.getIsfirst() == 1){
                     dialog = new QrScanDialog(MainActivity.this);
                     dialog.setCanceledOnTouchOutside(false);
-                    dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            MainActivity.this.finish();
-                        }
-                    });
+                    dialog.setCancelable(false);
                     dialog.show();
                 }
 
@@ -128,10 +125,6 @@ public class MainActivity extends AppCompatActivity
     public void setWeight(int weight){
         this.weight = weight;
     }
-    public void setGoal(String goal,String intensity){
-        this.goal = goal;
-        this.intensity = intensity;
-    }
 
     private void setUserInfo(){
         String name = SharedPreferenceBase.getSharedPreference("name","NONE");
@@ -139,6 +132,7 @@ public class MainActivity extends AppCompatActivity
         ((TextView)findViewById(R.id.tv_name)).setText(name);
         ((TextView)findViewById(R.id.tv_email)).setText(email);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,7 +155,7 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
                     }
-                    Toast.makeText(this, barcode.displayValue, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "SCAN REGISTRATION SUCCESS", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "No.....", Toast.LENGTH_SHORT).show();
                 }
@@ -243,6 +237,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.layout_exercise:
                 goExerciseActivity();
                 break;
+            case R.id.layout_scan:
+                DisplayScanDialog();
+                break;
         }
     }
 
@@ -268,5 +265,12 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(MainActivity.this,ExerciseActivity.class);
         startActivity(intent);
     }
-
+    private void DisplayScanDialog(){
+        dialog = new QrScanDialog(MainActivity.this);
+        ((TextView)dialog.findViewById(R.id.tv_title)).setText("");
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(true);
+        dialog.show();
+    }
 }
+

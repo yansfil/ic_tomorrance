@@ -118,95 +118,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Goal"
-                android:layout_marginTop="15dp"
-                android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioGroup
-                android:id="@+id/group_goal"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                >
-
-                <RadioButton
-                    android:id="@+id/goal1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="lose Weight" />
-
-                <RadioButton
-                    android:id="@+id/goal2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="gain Weight" />
-
-                <RadioButton
-                    android:id="@+id/goal3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="gain muscle" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Intensity"
-                android:layout_marginTop="15dp"
-                android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioGroup
-                android:id="@+id/group_intensity"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView12">
-
-                <RadioButton
-                    android:id="@+id/intensity1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="weak" />
-
-                <RadioButton
-                    android:id="@+id/intensity2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="moderate" />
-
-                <RadioButton
-                    android:id="@+id/intensity3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="strong" />
-            </RadioGroup>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="비밀번호 (8-16자로 입력해주세요)"
@@ -262,7 +173,92 @@
                     android:layout_weight="1"
                     android:inputType="textPassword" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal"
+                android:layout_marginTop="15dp"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <RadioGroup
+                android:id="@+id/group_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/goal1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="lose Weight" />
+
+                <RadioButton
+                    android:id="@+id/goal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="gain Weight" />
+
+                <RadioButton
+                    android:id="@+id/goal3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="gain muscle" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intensity"
+                android:textSize="11sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/group_intensity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView12">
+
+                <RadioButton
+                    android:id="@+id/intensity1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="weak" />
+
+                <RadioButton
+                    android:id="@+id/intensity2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="moderate" />
+
+                <RadioButton
+                    android:id="@+id/intensity3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="strong" />
+            </RadioGroup>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="33dp"

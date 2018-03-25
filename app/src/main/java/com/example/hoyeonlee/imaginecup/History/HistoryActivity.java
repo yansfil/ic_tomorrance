@@ -1,5 +1,6 @@
 package com.example.hoyeonlee.imaginecup.History;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,9 +13,9 @@ import android.widget.Toast;
 import com.example.hoyeonlee.imaginecup.BackActionBarActivity;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
 import com.example.hoyeonlee.imaginecup.R;
+import com.example.hoyeonlee.imaginecup.Utils.DownloadFilesTask;
 import com.example.hoyeonlee.imaginecup.Utils.ModelLoadTask;
 import com.example.hoyeonlee.imaginecup.Utils.StaticFunctions;
-import com.example.hoyeonlee.imaginecup.ViewModel.DownloadFilesTask;
 import com.example.hoyeonlee.imaginecup._Application;
 import com.example.hoyeonlee.imaginecup.data.BodyInfos;
 import com.example.hoyeonlee.imaginecup.data.Item;
@@ -39,6 +40,7 @@ public class HistoryActivity extends BackActionBarActivity {
     _Application app;
     private ViewGroup containerView;
     private ProgressBar progressBar;
+    private ProgressDialog progressDiaglog;
     private ModelLoadTask modelLoadTask;
     private ArrayList<String> modelUrlList = new ArrayList<>();
     boolean isFirstCall= true;
@@ -124,6 +126,11 @@ public class HistoryActivity extends BackActionBarActivity {
     }
 
     private void modelLoad(int position){
+        progressDiaglog=new ProgressDialog(HistoryActivity.this);
+        progressDiaglog.setMessage("Downloading...");
+        progressDiaglog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDiaglog.setIndeterminate(true);
+        progressDiaglog.setCancelable(true);
         Uri modelUrl = Uri.parse(bodyInfos.getItems().get(position).getModel());
         File path= getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         File outputFile= new File(path, modelLoadTask.getFileName(modelUrl)); //파일명까지 포함함 경로의 File 객체 생성
@@ -131,11 +138,8 @@ public class HistoryActivity extends BackActionBarActivity {
             modelLoadTask.loadCurrentModel(outputFile);
             return;
         }
-        modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
-        // a model in network --> view
-        modelLoadTask.execute(modelUrl);
-        //a model in network --> directory
-        DownloadFilesTask downloadTask = new DownloadFilesTask(HistoryActivity.this);
+        //a model in network --> directory --> View
+        DownloadFilesTask downloadTask = new DownloadFilesTask(HistoryActivity.this,progressDiaglog,modelLoadTask);
         downloadTask.execute(bodyInfos.getItems().get(position).getModel());
     }
 }

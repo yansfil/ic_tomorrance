@@ -21,15 +21,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:icon"
+        android:largeHeap="true"
         android:theme="@style/NoActionBar">
-        <activity android:name=".GoalDialog">
+
+        <activity android:name=".Login.SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Login.SigninActivity">
         </activity>
 
         <activity android:name=".Login.SignUpActivity">

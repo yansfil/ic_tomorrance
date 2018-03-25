@@ -120,7 +120,7 @@ public class ModelLoadTask extends AsyncTask<Uri, Integer, Model> {
         currentModel = model;
         createNewModelView(model);
         Toast.makeText(context, R.string.open_model_success, Toast.LENGTH_SHORT).show();
-        progressBar.setVisibility(View.GONE);
+
     }
     @Nullable
     public Model getCurrentModel() {

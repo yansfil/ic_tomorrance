@@ -12,12 +12,15 @@ import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.MainActivity;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
+import com.example.hoyeonlee.imaginecup.Notification.MyHandler;
+import com.example.hoyeonlee.imaginecup.Notification.NotificationSettings;
 import com.example.hoyeonlee.imaginecup.Notification.RegistrationIntentService;
 import com.example.hoyeonlee.imaginecup.R;
 import com.example.hoyeonlee.imaginecup._Application;
 import com.example.hoyeonlee.imaginecup.data.LoginResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,13 +52,14 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         apiService = _Application.getInstance().getApiService();
         loginButton.setOnClickListener(this);
         signupButton.setOnClickListener(this);
+        NotificationsManager.handleNotifications(this, NotificationSettings.SenderId, MyHandler.class);
         registerWithNotificationHubs();
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_login){
-            Call<LoginResult> login = apiService.login("yansfil","ghdus2",_Application.getDeviceId());
+            Call<LoginResult> login = apiService.login(emailInput.getText().toString(),passwordInput.getText().toString(),_Application.getDeviceId());
             login.enqueue(new Callback<LoginResult>() {
                 @Override
                 public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {

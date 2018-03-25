@@ -7,24 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.MainActivity;
-import com.example.hoyeonlee.imaginecup.Network.AddCookiesInterceptor;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
-import com.example.hoyeonlee.imaginecup.Network.ReceivedCookiesInterceptor;
 import com.example.hoyeonlee.imaginecup.R;
 import com.example.hoyeonlee.imaginecup._Application;
 import com.example.hoyeonlee.imaginecup.data.LoginResult;
 
 import java.util.regex.Pattern;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class SignUpActivity extends AppCompatActivity {
     Context mContext;
@@ -34,15 +31,18 @@ public class SignUpActivity extends AppCompatActivity {
     EditText pw;
     EditText pwRe;
     Button joinButton;
+    RadioGroup goalGroup;
+    RadioGroup intensityGroup;
     TextView login;
-    private final int CHECKBOX_ERROR = 0;
     private final int EMAIL_ERROR = 1;
     private final int PW_ERROR = 2;
     private final int NAME_ERROR = 3;
     private final int EQUAL_PW_ERROR = 4;
     private final int SUCCESS = 5;
-    Retrofit retrofit;
     ApiService apiService;
+
+    String goal = "";
+    String intensity = "";
 
 
     @Override
@@ -57,14 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
         pwRe = findViewById(R.id.input_password_re);
         joinButton = findViewById(R.id.btn_join);
         login = findViewById(R.id.tv_login);
-        OkHttpClient.Builder oktHttpClient = new OkHttpClient.Builder();
-        oktHttpClient.interceptors().add(new AddCookiesInterceptor());
-        oktHttpClient.interceptors().add(new ReceivedCookiesInterceptor());
-        retrofit = new Retrofit.Builder().
-                baseUrl(ApiService.URL).
-                client(oktHttpClient.build()).
-                build();
-        apiService = retrofit.create(ApiService.class);
+        goalGroup = findViewById(R.id.group_goal);
+        intensityGroup = findViewById(R.id.group_intensity);
+        apiService = _Application.getInstance().getApiService();
 
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,29 +113,54 @@ public class SignUpActivity extends AppCompatActivity {
 //        } else if (result == EQUAL_PW_ERROR) {
 //            Toast.makeText(SignUpActivity.this, "비밀번호가 다릅니다", Toast.LENGTH_SHORT).show();
 //        }else{
-            String emailText = email.getText().toString();
-            String passwordText = pw.getText().toString();
-            String nameText = name.getText().toString();
-            String heightText = height.getText().toString();
-            Call<LoginResult> join = apiService.join(nameText,heightText,emailText,passwordText, _Application.getDeviceId());
-            join.enqueue(new Callback<LoginResult>() {
-                @Override
-                public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-                    if(response.body().getCode().equals("1")) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+        String emailText = email.getText().toString();
+        String passwordText = pw.getText().toString();
+        String nameText = name.getText().toString();
+        String heightText = height.getText().toString();
+        switch (goalGroup.getCheckedRadioButtonId()){
+            case R.id.goal1:
+                goal = "loseWeight";
+                break;
+            case R.id.goal2:
+                goal = "gainWeight";
+                break;
+            case R.id.goal3:
+                goal = "gainMuscle";
+                break;
+            default:
+                goal = "loseWeight";
+                break;
+        }
+        switch (intensityGroup.getCheckedRadioButtonId()) {
+            case R.id.intensity1:
+                intensity = "weak";
+                break;
+            case R.id.intensity2:
+                intensity = "moderate";
+                break;
+            case R.id.intensity3:
+                intensity = "strong";
+                break;
+            default:
+                intensity = "weak";
+                break;
+        }
+        Call<LoginResult> join = apiService.join(nameText,heightText,emailText,passwordText,goal,intensity,_Application.getDeviceId());
+        join.enqueue(new Callback<LoginResult>() {
+            @Override
+            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                if(response.body().getCode().equals("1")) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-
-                @Override
-                public void onFailure(Call<LoginResult> call, Throwable t) {
-                    Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                }
-            });
-//        }
-
+                else Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LoginResult> call, Throwable t) {
+                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     protected void onResume() {

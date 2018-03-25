@@ -39,7 +39,7 @@ public class ObjModel extends IndexedModel {
 
     public ObjModel(@NonNull InputStream inputStream) throws IOException {
         super();
-        BufferedInputStream stream = new BufferedInputStream(inputStream, INPUT_BUFFER_SIZE);
+        BufferedInputStream stream = new BufferedInputStream(inputStream);
         readText(stream);
         if (vertexCount <= 0 || vertexBuffer == null || normalBuffer == null
                 || indexCount <= 0 || indexBuffer == null) {
@@ -74,7 +74,6 @@ public class ObjModel extends IndexedModel {
         for (int i = 0; i < intArr.length; i++) {
             intArr[i] = new int[8];
         }
-
         while ((line = reader.readLine()) != null) {
             line = line.trim();
             lineArr = line.split("\\s+");

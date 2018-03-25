@@ -1,4 +1,4 @@
-package com.example.hoyeonlee.imaginecup.ViewModel;
+package com.example.hoyeonlee.imaginecup.Utils;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContentResolverCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -33,9 +34,11 @@ public class DownloadFilesTask extends AsyncTask<String,String,Long>{
     private ProgressDialog progressBar;
     private File path;
     private File outputFile;
-    public DownloadFilesTask(Context context, ProgressDialog progressBar) {
+    private ModelLoadTask modelLoadTask;
+    public DownloadFilesTask(Context context, ProgressDialog progressBar, ModelLoadTask modelLoadTask) {
         this.context = context;
         this.progressBar = progressBar;
+        this.modelLoadTask = modelLoadTask;
     }
     public DownloadFilesTask(Context context) {
         this.context = context;
@@ -104,7 +107,6 @@ public class DownloadFilesTask extends AsyncTask<String,String,Long>{
                     float per = ((float)downloadedSize/FileSize) * 100;
                     String str = "Downloaded " + downloadedSize + "KB / " + FileSize + "KB (" + (int)per + "%)";
                     publishProgress("" + (int) ((downloadedSize * 100) / FileSize), str);
-
                 }
 
                 //파일에 데이터를 기록합니다.
@@ -157,15 +159,12 @@ public class DownloadFilesTask extends AsyncTask<String,String,Long>{
             progressBar.dismiss();
         }
 
-//        if ( size > 0) {
-//            Toast.makeText(context, "다운로드 완료되었습니다. 파일 크기=" + size.toString(), Toast.LENGTH_LONG).show();
-//
-//            Intent mediaScanIntent = new Intent( Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//            mediaScanIntent.setData(Uri.fromFile(outputFile));
-//            context.sendBroadcast(mediaScanIntent);
-//        }
-//        else
-//            Toast.makeText(getApplicationContext(), "다운로드 에러", Toast.LENGTH_LONG).show();
+        if ( size > 0) {
+            Toast.makeText(context, "다운로드 완료되었습니다. 파일 크기=" + size.toString(), Toast.LENGTH_LONG).show();
+            modelLoadTask.loadCurrentModel(outputFile);
+        }
+        else
+            Toast.makeText(context, "다운로드 에러", Toast.LENGTH_LONG).show();
     }
     @Nullable
     private String getFileName(@NonNull ContentResolver cr, @NonNull Uri uri) {

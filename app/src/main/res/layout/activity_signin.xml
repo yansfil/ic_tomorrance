@@ -76,7 +76,7 @@
                     android:hint="이메일"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
-                    android:text="yansfil"
+                    android:text="jae"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -106,7 +106,7 @@
                     android:hint="비밀번호"
                     android:inputType="textPassword"
                     android:paddingLeft="10dp"
-                    android:text="ghdus2"
+                    android:text="1234"
                     android:textSize="12sp" />
 
             </LinearLayout>

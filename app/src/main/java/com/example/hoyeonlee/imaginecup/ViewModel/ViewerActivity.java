@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.example.hoyeonlee.imaginecup.BackActionBarActivity;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
 import com.example.hoyeonlee.imaginecup.R;
+import com.example.hoyeonlee.imaginecup.Utils.DownloadFilesTask;
 import com.example.hoyeonlee.imaginecup.Utils.ModelLoadTask;
 import com.example.hoyeonlee.imaginecup.Utils.StaticFunctions;
 import com.example.hoyeonlee.imaginecup._Application;
@@ -32,6 +34,7 @@ public class ViewerActivity extends BackActionBarActivity {
     ApiService apiService;
     private String modelUrl = null;
     private boolean isFirstCall = true;
+    private static final String TAG = "VIEWER_ACTIVITY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +49,7 @@ public class ViewerActivity extends BackActionBarActivity {
 
         modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
         //Progress Dialog Create
-        progressDiaglog=new ProgressDialog(ViewerActivity.this);
-        progressDiaglog.setMessage("Downloading...");
-        progressDiaglog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDiaglog.setIndeterminate(true);
-        progressDiaglog.setCancelable(true);
+
 
         //Network Process
         apiService = _Application.getInstance().getApiService();
@@ -62,19 +61,25 @@ public class ViewerActivity extends BackActionBarActivity {
                     return;
                 }
                 if(response.body().getCode() == 1){
+                    progressDiaglog=new ProgressDialog(ViewerActivity.this);
+                    progressDiaglog.setMessage("Downloading...");
+                    progressDiaglog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressDiaglog.setIndeterminate(true);
+                    progressDiaglog.setCancelable(true);
                     modelUrl = response.body().getItem().getModel();
                     Uri uri = Uri.parse(modelUrl);
                     //Check 3d model already exists
                     File path= getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
                     File outputFile= new File(path, modelLoadTask.getFileName(uri)); //파일명까지 포함함 경로의 File 객체 생성
+
                     if(outputFile.exists()){
+                        Log.v(TAG,"File already Exists");
                         modelLoadTask.loadCurrentModel(outputFile);
                         return;
                     }
-                    //a model in network --> view
-                    modelLoadTask.execute(uri);
-                    //a model in network --> directory
-                    DownloadFilesTask downloadTask = new DownloadFilesTask(ViewerActivity.this);
+                    Log.v(TAG,"File Download");
+                    //a model in network --> directory --> View
+                    DownloadFilesTask downloadTask = new DownloadFilesTask(ViewerActivity.this,progressDiaglog,modelLoadTask);
                     downloadTask.execute(modelUrl);
                 }else{
                     Toast.makeText(app, "SERVER ERROR", Toast.LENGTH_SHORT).show();
