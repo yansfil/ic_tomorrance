@@ -1,13 +1,16 @@
 package com.example.hoyeonlee.imaginecup.History;
 
-import android.app.ProgressDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.BackActionBarActivity;
@@ -23,7 +26,6 @@ import com.example.hoyeonlee.imaginecup.data.Item;
 import org.angmarch.views.NiceSpinner;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,16 +35,20 @@ import retrofit2.Response;
 
 public class HistoryActivity extends BackActionBarActivity {
 
+
     NiceSpinner dateSpinner;
     List<String> dateSet;
     BodyInfos bodyInfos;
     ApiService apiService;
     _Application app;
+
+    private TextView weightView;
+    private TextView bmiView;
+    private TextView whrView;
+    private TextView shapeView;
     private ViewGroup containerView;
-    private ProgressBar progressBar;
-    private ProgressDialog progressDiaglog;
+    Dialog dialogTransparent;
     private ModelLoadTask modelLoadTask;
-    private ArrayList<String> modelUrlList = new ArrayList<>();
     boolean isFirstCall= true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +56,29 @@ public class HistoryActivity extends BackActionBarActivity {
         setContentView(R.layout.activity_history);
         setToolbar();
         setTitle(getResources().getString(R.string.text_history));
-
+        weightView = findViewById(R.id.tv_weight);
+        bmiView = findViewById(R.id.tv_bmi);
+        whrView = findViewById(R.id.tv_whr);
+        shapeView = findViewById(R.id.tv_shape);
         containerView = findViewById(R.id.container_view);
-        progressBar = findViewById(R.id.model_progress_bar);
-        modelLoadTask = new ModelLoadTask(this,progressBar,containerView);
-        app = _Application.getInstance();
+        //Set Loading dialog
+        dialogTransparent = new Dialog(this, android.R.style.Theme_Black);
+        View view = LayoutInflater.from(this).inflate(
+                R.layout.dialog_loading, null);
+        dialogTransparent.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogTransparent.getWindow().setBackgroundDrawableResource(
+                R.color.transparent_dialog);
+        dialogTransparent.setContentView(view);
+        dialogTransparent.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                HistoryActivity.this.finish();
+            }
+        });
+        dialogTransparent.show();
+        modelLoadTask = new ModelLoadTask(this,dialogTransparent,containerView);
 
+        app = _Application.getInstance();
         dateSet = new LinkedList<>();
         dateSpinner = findViewById(R.id.spinner_date);
         apiService = _Application.getInstance().getApiService();
@@ -72,11 +95,13 @@ public class HistoryActivity extends BackActionBarActivity {
                     for(Item item : bodyInfos.getItems()){
                         dateSet.add(item.getTimestamp());
                     }
+                    Item info = bodyInfos.getItems().get(0);
+                    dateSpinner.attachDataSource(dateSet);
+                    modelLoad(0);
+                    dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getWhr(),info.getShape());
                 }else
                     Toast.makeText(HistoryActivity.this, "SERVER ERROR", Toast.LENGTH_SHORT).show();
                 //put dates into Spinner
-                dateSpinner.attachDataSource(dateSet);
-                modelLoad(0);
             }
 
             @Override
@@ -90,6 +115,8 @@ public class HistoryActivity extends BackActionBarActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 modelLoad(position);
+                Item info = bodyInfos.getItems().get(position);
+                dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getWhr(),info.getShape());
             }
 
             @Override
@@ -124,22 +151,25 @@ public class HistoryActivity extends BackActionBarActivity {
             modelLoadTask.modelView.onResume();
         }
     }
+    private void dataBind(String weight,String bmi, String whr,String shape){
+        weightView.setText(weight);
+        bmiView.setText(bmi);
+        whrView.setText(whr);
+        shapeView.setText(shape);
+    }
 
     private void modelLoad(int position){
-        progressDiaglog=new ProgressDialog(HistoryActivity.this);
-        progressDiaglog.setMessage("Downloading...");
-        progressDiaglog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDiaglog.setIndeterminate(true);
-        progressDiaglog.setCancelable(true);
+        dialogTransparent.show();
+        modelLoadTask = new ModelLoadTask(this,dialogTransparent,containerView);
         Uri modelUrl = Uri.parse(bodyInfos.getItems().get(position).getModel());
         File path= getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         File outputFile= new File(path, modelLoadTask.getFileName(modelUrl)); //파일명까지 포함함 경로의 File 객체 생성
         if(outputFile.exists()){
-            modelLoadTask.loadCurrentModel(outputFile);
+            modelLoadTask.loadCurrentModel(outputFile,position);
             return;
         }
         //a model in network --> directory --> View
-        DownloadFilesTask downloadTask = new DownloadFilesTask(HistoryActivity.this,progressDiaglog,modelLoadTask);
+        DownloadFilesTask downloadTask = new DownloadFilesTask(HistoryActivity.this,modelLoadTask,position);
         downloadTask.execute(bodyInfos.getItems().get(position).getModel());
     }
 }

@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.MainActivity;
@@ -20,6 +21,7 @@ import com.example.hoyeonlee.imaginecup.R;
 
 public class QrScanDialog extends Dialog{
     MainActivity context;
+    private boolean isFirst = true;
     public QrScanDialog(@NonNull Context context) {
         super(context);
         this.context = (MainActivity) context;
@@ -30,6 +32,9 @@ public class QrScanDialog extends Dialog{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_qr);
         Button button = findViewById(R.id.btn_scan);
+        if(!isFirst){
+            ((TextView)findViewById(R.id.tv_title)).setText("");
+        }
         final EditText weightInput = findViewById(R.id.input_weight);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -45,5 +50,8 @@ public class QrScanDialog extends Dialog{
                 }
             }
         });
+    }
+    public void setNotFirst(){
+        isFirst = false;
     }
 }

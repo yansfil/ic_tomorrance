@@ -54,7 +54,7 @@ public class MyInstanceIDService extends FirebaseInstanceIdService {
             String regID = hub.register(FCM_token,android_id).getRegistrationId();
             Log.d(TAG, "Notification HUB _ REG_ID : " + regID);
         }catch (Exception e){
-            Toast.makeText(this, "WhatTheFucking!!", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
 
     }

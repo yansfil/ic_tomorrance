@@ -31,6 +31,18 @@ public class Item {
     @Expose
     private String timestamp;
 
+    @SerializedName("bmi")
+    @Expose
+    private String bmi;
+
+    @SerializedName("whr")
+    @Expose
+    private String whr;
+
+    @SerializedName("shape")
+    @Expose
+    private String shape;
+
     public Integer getUserid() {
         return userid;
     }
@@ -87,4 +99,27 @@ public class Item {
         this.timestamp = timestamp;
     }
 
+    public String getBmi() {
+        return bmi;
+    }
+
+    public void setBmi(String bmi) {
+        this.bmi = bmi;
+    }
+
+    public String getWhr() {
+        return whr;
+    }
+
+    public void setWhr(String whr) {
+        this.whr = whr;
+    }
+
+    public String getShape() {
+        return shape;
+    }
+
+    public void setShape(String shape) {
+        this.shape = shape;
+    }
 }

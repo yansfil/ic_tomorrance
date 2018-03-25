@@ -28,9 +28,6 @@ public class MyHandler extends NotificationsHandler {
         ctx = context;
         String nhMessage = bundle.getString("message");
         sendNotification(nhMessage);
-        if (NotiTestActivity.isVisible) {
-            NotiTestActivity.notiTestActivity.ToastNotify(nhMessage);
-        }
     }
 
     private void sendNotification(String msg) {
@@ -48,6 +45,7 @@ public class MyHandler extends NotificationsHandler {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
                         .setSmallIcon(R.mipmap.ic_launcher)
+                        .setAutoCancel(true)
                         .setContentTitle("NunBody")
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))

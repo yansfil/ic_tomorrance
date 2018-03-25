@@ -1,6 +1,5 @@
 package com.example.hoyeonlee.imaginecup.Utils;
 
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -31,18 +30,14 @@ import java.net.URLConnection;
 public class DownloadFilesTask extends AsyncTask<String,String,Long>{
     private Context context;
     private PowerManager.WakeLock mWakeLock;
-    private ProgressDialog progressBar;
     private File path;
     private File outputFile;
     private ModelLoadTask modelLoadTask;
-    public DownloadFilesTask(Context context, ProgressDialog progressBar, ModelLoadTask modelLoadTask) {
+    private int position = 0;
+    public DownloadFilesTask(Context context, ModelLoadTask modelLoadTask, int position) {
+        this.position = position;
         this.context = context;
-        this.progressBar = progressBar;
         this.modelLoadTask = modelLoadTask;
-    }
-    public DownloadFilesTask(Context context) {
-        this.context = context;
-
     }
 
     //파일 다운로드를 시작하기 전에 프로그레스바를 화면에 보여줍니다.
@@ -55,9 +50,6 @@ public class DownloadFilesTask extends AsyncTask<String,String,Long>{
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
         mWakeLock.acquire();
-        if(progressBar != null){
-            progressBar.show();
-        }
     }
 
 
@@ -142,29 +134,17 @@ public class DownloadFilesTask extends AsyncTask<String,String,Long>{
     @Override
     protected void onProgressUpdate(String... progress) { //4
         super.onProgressUpdate(progress);
-        if(progressBar != null) {
-            // if we get here, length is known, now set indeterminate to false
-            progressBar.setIndeterminate(false);
-            progressBar.setMax(100);
-            progressBar.setProgress(Integer.parseInt(progress[0]));
-            progressBar.setMessage(progress[1]);
-        }
     }
 
     //파일 다운로드 완료 후
     @Override
     protected void onPostExecute(Long size) { //5
         super.onPostExecute(size);
-        if(progressBar != null){
-            progressBar.dismiss();
-        }
-
         if ( size > 0) {
-            Toast.makeText(context, "다운로드 완료되었습니다. 파일 크기=" + size.toString(), Toast.LENGTH_LONG).show();
-            modelLoadTask.loadCurrentModel(outputFile);
+            modelLoadTask.loadCurrentModel(outputFile,position);
         }
         else
-            Toast.makeText(context, "다운로드 에러", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "DOWNLOAD ERROR", Toast.LENGTH_LONG).show();
     }
     @Nullable
     private String getFileName(@NonNull ContentResolver cr, @NonNull Uri uri) {

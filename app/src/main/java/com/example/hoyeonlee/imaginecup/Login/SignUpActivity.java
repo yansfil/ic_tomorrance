@@ -1,10 +1,13 @@
 package com.example.hoyeonlee.imaginecup.Login;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -40,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
     private final int EQUAL_PW_ERROR = 4;
     private final int SUCCESS = 5;
     ApiService apiService;
-
+    Dialog dialogTransparent;
     String goal = "";
     String intensity = "";
 
@@ -60,6 +63,16 @@ public class SignUpActivity extends AppCompatActivity {
         goalGroup = findViewById(R.id.group_goal);
         intensityGroup = findViewById(R.id.group_intensity);
         apiService = _Application.getInstance().getApiService();
+
+        //Loading Dialog
+        dialogTransparent = new Dialog(this, android.R.style.Theme_Black);
+        View view = LayoutInflater.from(this).inflate(
+                R.layout.dialog_loading, null);
+        dialogTransparent.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogTransparent.getWindow().setBackgroundDrawableResource(
+                R.color.transparent_dialog);
+        dialogTransparent.setContentView(view);
+        dialogTransparent.setCancelable(false);
 
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void login() {
+        dialogTransparent.show();
 //        if(result == CHECKBOX_ERROR){
 //            Toast.makeText(SignUpActivity.this, "이용약관에 동의해주세요", Toast.LENGTH_SHORT).show();
 //        }else if (result == EMAIL_ERROR) {
@@ -151,14 +165,17 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 if(response.body().getCode().equals("1")) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 }
                 else Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                dialogTransparent.dismiss();
             }
             @Override
             public void onFailure(Call<LoginResult> call, Throwable t) {
                 Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                dialogTransparent.dismiss();
             }
         });
     }

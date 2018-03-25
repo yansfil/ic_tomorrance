@@ -31,9 +31,7 @@ import com.example.hoyeonlee.imaginecup.ViewModel.ViewerActivity;
 import com.example.hoyeonlee.imaginecup.data.Main;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
-
 import java.io.File;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -146,7 +144,7 @@ public class MainActivity extends AppCompatActivity
                         reserve.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                Toast.makeText(MainActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "SCAN REGISTRATION SUCCESS", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -155,9 +153,8 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
                     }
-                    Toast.makeText(this, "SCAN REGISTRATION SUCCESS", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "No.....", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "ERROR. PLEASE RETRY", Toast.LENGTH_SHORT).show();
                 }
             } else
                 Log.e("ERROR_BARCODE", String.format(getString(R.string.barcode_error_format),
@@ -267,7 +264,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void DisplayScanDialog(){
         dialog = new QrScanDialog(MainActivity.this);
-        ((TextView)dialog.findViewById(R.id.tv_title)).setText("");
+        dialog.setNotFirst();
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(true);
         dialog.show();

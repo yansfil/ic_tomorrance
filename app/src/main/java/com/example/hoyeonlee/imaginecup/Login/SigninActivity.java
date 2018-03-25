@@ -1,11 +1,14 @@
 package com.example.hoyeonlee.imaginecup.Login;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     EditText emailInput;
     EditText passwordInput;
     ApiService apiService;
+    Dialog dialogTransparent;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "LOGIN_ACTIVITY";
     @Override
@@ -54,11 +58,22 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         signupButton.setOnClickListener(this);
         NotificationsManager.handleNotifications(this, NotificationSettings.SenderId, MyHandler.class);
         registerWithNotificationHubs();
+
+        //Loading Dialog
+        dialogTransparent = new Dialog(this, android.R.style.Theme_Black);
+        View view = LayoutInflater.from(this).inflate(
+                R.layout.dialog_loading, null);
+        dialogTransparent.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogTransparent.getWindow().setBackgroundDrawableResource(
+                R.color.transparent_dialog);
+        dialogTransparent.setContentView(view);
+        dialogTransparent.setCancelable(false);
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_login){
+            dialogTransparent.show();
             Call<LoginResult> login = apiService.login(emailInput.getText().toString(),passwordInput.getText().toString(),_Application.getDeviceId());
             login.enqueue(new Callback<LoginResult>() {
                 @Override
@@ -69,11 +84,13 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                             finish();
                         }
                         else Toast.makeText(SigninActivity.this, "Login Error. Try again!!", Toast.LENGTH_SHORT).show();
+                        dialogTransparent.dismiss();
                 }
 
                 @Override
                 public void onFailure(Call<LoginResult> call, Throwable t) {
                     Toast.makeText(SigninActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    dialogTransparent.dismiss();
                 }
             });
 
