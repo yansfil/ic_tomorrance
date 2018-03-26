@@ -52,7 +52,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     private void updateViewMatrix() {
         Matrix.setLookAtM(viewMatrix, 0, 0, 0, translateZ, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
         Matrix.translateM(viewMatrix, 0, -translateX, -translateY, 0f);
-        Matrix.rotateM(viewMatrix, 0, rotateAngleX, 1f, 0f, 0f);
+        Matrix.rotateM(viewMatrix, 0, 0, 1f, 0f, 0f);
         Matrix.rotateM(viewMatrix, 0, rotateAngleY, 0f, 1f, 0f);
     }
 

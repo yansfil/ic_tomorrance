@@ -17,7 +17,7 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
-    public static final String URL = "http://172.24.127.39:3000";
+    public static final String URL = "http://192.168.0.45:3000";
     @FormUrlEncoded
     @POST("/client/login")
     Call<LoginResult> login(@Field("email") String email, @Field("password") String password, @Field("pushid") String clientId);

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.BackActionBarActivity;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
+import com.example.hoyeonlee.imaginecup.Network.SharedPreferenceBase;
 import com.example.hoyeonlee.imaginecup.R;
 import com.example.hoyeonlee.imaginecup.Utils.DownloadFilesTask;
 import com.example.hoyeonlee.imaginecup.Utils.ModelLoadTask;
@@ -34,6 +35,7 @@ public class ViewerActivity extends BackActionBarActivity {
     private _Application app;
     private ViewGroup containerView;
     private ModelLoadTask modelLoadTask;
+    private TextView heightView;
     private TextView weightView;
     private TextView bmiView;
     private TextView whrView;
@@ -48,7 +50,8 @@ public class ViewerActivity extends BackActionBarActivity {
         setContentView(R.layout.activity_viewer);
         setToolbar();
         setTitle(getResources().getString(R.string.text_model));
-
+        //Views initialization
+        heightView = findViewById(R.id.tv_height);
         weightView = findViewById(R.id.tv_weight);
         bmiView = findViewById(R.id.tv_bmi);
         whrView = findViewById(R.id.tv_whr);
@@ -141,6 +144,7 @@ public class ViewerActivity extends BackActionBarActivity {
         }
     }
     private void dataBind(String weight,String bmi, String whr,String shape){
+        heightView.setText(SharedPreferenceBase.getSharedPreference("height","0"));
         weightView.setText(weight);
         bmiView.setText(bmi);
         whrView.setText(whr);

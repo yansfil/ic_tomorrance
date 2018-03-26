@@ -36,9 +36,15 @@ public class BackActionBarActivity extends AppCompatActivity {
             });
         }
     }
+
     protected void setTitle(@NonNull String title){
         TextView titleTextView = toolbar.findViewById(R.id.tv_title);
         titleTextView.setText(title);
+    }
+
+    protected void setColor(@NonNull int color){
+        TextView titleTextView = toolbar.findViewById(R.id.tv_title);
+        titleTextView.setTextColor(color);
     }
     @Override
     protected void attachBaseContext(Context newBase) {

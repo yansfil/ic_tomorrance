@@ -93,7 +93,7 @@
         <activity android:name=".History.HistoryActivity">
         </activity>
 
-        <activity android:name=".Measure.MeasureActivity">
+        <activity android:name=".Status.StatusActivity">
         </activity>
 
         <activity android:name=".Exercise.ExerciseActivity">

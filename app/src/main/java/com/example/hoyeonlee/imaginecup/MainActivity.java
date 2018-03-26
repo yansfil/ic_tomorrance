@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.example.hoyeonlee.imaginecup.Exercise.ExerciseActivity;
 import com.example.hoyeonlee.imaginecup.History.HistoryActivity;
-import com.example.hoyeonlee.imaginecup.Measure.MeasureActivity;
+import com.example.hoyeonlee.imaginecup.Status.StatusActivity;
 import com.example.hoyeonlee.imaginecup.Network.ApiService;
 import com.example.hoyeonlee.imaginecup.Network.SharedPreferenceBase;
 import com.example.hoyeonlee.imaginecup.QrScan.QrScanDialog;
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
     private void goMeasureActivity(){
-        Intent intent = new Intent(MainActivity.this,MeasureActivity.class);
+        Intent intent = new Intent(MainActivity.this,StatusActivity.class);
         startActivity(intent);
     }
     private void goExerciseActivity(){
