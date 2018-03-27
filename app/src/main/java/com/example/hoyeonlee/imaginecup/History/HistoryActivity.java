@@ -44,7 +44,6 @@ public class HistoryActivity extends BackActionBarActivity {
 
     private TextView weightView;
     private TextView bmiView;
-    private TextView whrView;
     private TextView shapeView;
     private ViewGroup containerView;
     Dialog dialogTransparent;
@@ -58,7 +57,6 @@ public class HistoryActivity extends BackActionBarActivity {
         setTitle(getResources().getString(R.string.text_history));
         weightView = findViewById(R.id.tv_weight);
         bmiView = findViewById(R.id.tv_bmi);
-        whrView = findViewById(R.id.tv_whr);
         shapeView = findViewById(R.id.tv_shape);
         containerView = findViewById(R.id.container_view);
         //Set Loading dialog
@@ -98,7 +96,7 @@ public class HistoryActivity extends BackActionBarActivity {
                     Item info = bodyInfos.getItems().get(0);
                     dateSpinner.attachDataSource(dateSet);
                     modelLoad(0);
-                    dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getWhr(),info.getShape());
+                    dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getShape());
                 }else
                     Toast.makeText(HistoryActivity.this, "SERVER ERROR", Toast.LENGTH_SHORT).show();
                 //put dates into Spinner
@@ -116,7 +114,7 @@ public class HistoryActivity extends BackActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 modelLoad(position);
                 Item info = bodyInfos.getItems().get(position);
-                dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getWhr(),info.getShape());
+                dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getShape());
             }
 
             @Override
@@ -151,10 +149,9 @@ public class HistoryActivity extends BackActionBarActivity {
             modelLoadTask.modelView.onResume();
         }
     }
-    private void dataBind(String weight,String bmi, String whr,String shape){
-        weightView.setText(weight);
+    private void dataBind(String weight,String bmi,String shape){
+        weightView.setText(weight+"kg");
         bmiView.setText(bmi);
-        whrView.setText(whr);
         shapeView.setText(shape);
     }
 

@@ -90,6 +90,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onFailure(Call<LoginResult> call, Throwable t) {
                     Toast.makeText(SigninActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG,t.getMessage());
                     dialogTransparent.dismiss();
                 }
             });

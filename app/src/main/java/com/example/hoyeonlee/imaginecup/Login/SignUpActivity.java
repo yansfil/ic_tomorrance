@@ -36,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button joinButton;
     RadioGroup goalGroup;
     RadioGroup intensityGroup;
+    RadioGroup genderGroup;
     TextView login;
     private final int EMAIL_ERROR = 1;
     private final int PW_ERROR = 2;
@@ -46,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
     Dialog dialogTransparent;
     String goal = "";
     String intensity = "";
-
+    String gender = "man";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         login = findViewById(R.id.tv_login);
         goalGroup = findViewById(R.id.group_goal);
         intensityGroup = findViewById(R.id.group_intensity);
+        genderGroup = findViewById(R.id.group_gender);
         apiService = _Application.getInstance().getApiService();
 
         //Loading Dialog
@@ -159,7 +161,18 @@ public class SignUpActivity extends AppCompatActivity {
                 intensity = "weak";
                 break;
         }
-        Call<LoginResult> join = apiService.join(nameText,heightText,emailText,passwordText,goal,intensity,_Application.getDeviceId());
+        switch (genderGroup.getCheckedRadioButtonId()) {
+            case R.id.gender1:
+                intensity = "man";
+                break;
+            case R.id.gender2:
+                intensity = "woman";
+                break;
+            default:
+                intensity = "man";
+                break;
+        }
+        Call<LoginResult> join = apiService.join(nameText,heightText,emailText,passwordText,goal,intensity,gender,_Application.getDeviceId());
         join.enqueue(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {

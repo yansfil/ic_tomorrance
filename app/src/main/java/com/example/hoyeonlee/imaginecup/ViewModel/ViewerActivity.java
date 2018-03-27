@@ -38,7 +38,6 @@ public class ViewerActivity extends BackActionBarActivity {
     private TextView heightView;
     private TextView weightView;
     private TextView bmiView;
-    private TextView whrView;
     private TextView shapeView;
     ApiService apiService;
     private String modelUrl = null;
@@ -54,7 +53,6 @@ public class ViewerActivity extends BackActionBarActivity {
         heightView = findViewById(R.id.tv_height);
         weightView = findViewById(R.id.tv_weight);
         bmiView = findViewById(R.id.tv_bmi);
-        whrView = findViewById(R.id.tv_whr);
         shapeView = findViewById(R.id.tv_shape);
         app = _Application.getInstance();
         containerView = findViewById(R.id.container_view);
@@ -104,7 +102,7 @@ public class ViewerActivity extends BackActionBarActivity {
                         DownloadFilesTask downloadTask = new DownloadFilesTask(ViewerActivity.this, modelLoadTask, 0);
                         downloadTask.execute(modelUrl);
                     }
-                    dataBind(item.getWeight()+"",item.getBmi(),item.getWhr(),item.getShape());
+                    dataBind(item.getWeight()+"",item.getBmi(),item.getShape());
 
                 }else{
                     Toast.makeText(app, "SERVER ERROR", Toast.LENGTH_SHORT).show();
@@ -143,11 +141,10 @@ public class ViewerActivity extends BackActionBarActivity {
             modelLoadTask.modelView.onResume();
         }
     }
-    private void dataBind(String weight,String bmi, String whr,String shape){
-        heightView.setText(SharedPreferenceBase.getSharedPreference("height","0"));
-        weightView.setText(weight);
+    private void dataBind(String weight,String bmi,String shape){
+        heightView.setText(SharedPreferenceBase.getSharedPreference("height","0")+"");
+        weightView.setText(weight+"kg");
         bmiView.setText(bmi);
-        whrView.setText(whr);
         shapeView.setText(shape);
     }
 }

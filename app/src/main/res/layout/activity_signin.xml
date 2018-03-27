@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인"
+            android:text="Sign in"
             android:id="@+id/textView20"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이메일"
+                android:text="email"
                 android:id="@+id/textView22"
                 android:textSize="11sp" />
 
@@ -73,7 +73,7 @@
                     android:background="@drawable/layer_textarea"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="이메일"
+                    android:hint=""
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
                     android:text="jae"
@@ -84,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
+                android:text="password"
                 android:id="@+id/textView96"
                 android:textSize="11sp"
                 android:layout_marginTop="15dp" />
@@ -103,7 +103,7 @@
                     android:background="@drawable/layer_textarea"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="비밀번호"
+                    android:hint="password"
                     android:inputType="textPassword"
                     android:paddingLeft="10dp"
                     android:text="1234"
@@ -136,7 +136,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="또는 아래 계정으로 로그인하기"
+                android:text="Social Login"
                 android:id="@+id/textView"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"

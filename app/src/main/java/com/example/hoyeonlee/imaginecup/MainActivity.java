@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity
     LinearLayout scanLayout;
     QrScanDialog dialog;
     private int weight = 0;
-    private String goal = "";
-    private String intensity = "";
+    private boolean isFirst = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +95,7 @@ public class MainActivity extends AppCompatActivity
                 setUserInfo();
                 //If user access first time, provide a QR SCAN dialog
                 if(mainData.getIsfirst() == 1){
+                    isFirst = true;
                     dialog = new QrScanDialog(MainActivity.this);
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.setCancelable(false);
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_exercise) {
             goExerciseActivity();
         } else if (id == R.id.nav_measure) {
-            goMeasureActivity();
+            goStatusActivity();
         } else if (id == R.id.nav_history) {
             goHistoryActivity();
         } else if (id == R.id.nav_share) {
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity
                 goHistoryActivity();
                 break;
             case R.id.layout_measure:
-                goMeasureActivity();
+                goStatusActivity();
                 break;
             case R.id.layout_exercise:
                 goExerciseActivity();
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(MainActivity.this,HistoryActivity.class);
         startActivity(intent);
     }
-    private void goMeasureActivity(){
+    private void goStatusActivity(){
         Intent intent = new Intent(MainActivity.this,StatusActivity.class);
         startActivity(intent);
     }

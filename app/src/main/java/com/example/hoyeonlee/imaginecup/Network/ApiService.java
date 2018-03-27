@@ -2,6 +2,7 @@ package com.example.hoyeonlee.imaginecup.Network;
 
 import com.example.hoyeonlee.imaginecup.data.BodyInfo;
 import com.example.hoyeonlee.imaginecup.data.BodyInfos;
+import com.example.hoyeonlee.imaginecup.data.ExerciseInfo;
 import com.example.hoyeonlee.imaginecup.data.LoginResult;
 import com.example.hoyeonlee.imaginecup.data.Main;
 
@@ -17,14 +18,14 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
-    public static final String URL = "http://192.168.0.45:3000";
+    public static final String URL = "http://172.24.121.101:3000";
     @FormUrlEncoded
     @POST("/client/login")
     Call<LoginResult> login(@Field("email") String email, @Field("password") String password, @Field("pushid") String clientId);
 
     @FormUrlEncoded
     @POST("/client/join")
-    Call<LoginResult> join(@Field("name") String name,@Field("height") String height, @Field("email") String email, @Field("password") String password,@Field("goal") String goal,@Field("intensity") String intensity,@Field("pushid") String clientId);
+    Call<LoginResult> join(@Field("name") String name, @Field("height") String height, @Field("email") String email, @Field("password") String password, @Field("goal") String goal, @Field("gender") String gender, @Field("pushid") String clientId, @Field("intensity") String intensity);
 
     @FormUrlEncoded
     @POST("/client/reservation")
@@ -42,6 +43,12 @@ public interface ApiService {
 
     @GET("/client/all-info")
     Call<BodyInfos> getAllInfo();
+
+    @GET("/client/status")
+    Call<BodyInfos> getStatus();
+
+    @GET("/client/exercise")
+    Call<ExerciseInfo> getExercise();
 
     @GET("/client/bodySize")
     Call<BodyInfo> getBodySize();

@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="text_model">My body</string>
-    <string name="text_history">My body\'s history</string>
+    <string name="text_history">History</string>
     <string name="text_measure">Status</string>
     <string name="text_exercise">Recommended exercise</string>
     <string name="text_scan">Scan</string>
