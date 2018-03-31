@@ -96,7 +96,7 @@ public class HistoryActivity extends BackActionBarActivity {
                     Item info = bodyInfos.getItems().get(0);
                     dateSpinner.attachDataSource(dateSet);
                     modelLoad(0);
-                    dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getShape());
+                    dataBind(String.valueOf(info.getWeight()),info.getBmi()+"",info.getShape());
                 }else
                     Toast.makeText(HistoryActivity.this, "SERVER ERROR", Toast.LENGTH_SHORT).show();
                 //put dates into Spinner
@@ -114,7 +114,7 @@ public class HistoryActivity extends BackActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 modelLoad(position);
                 Item info = bodyInfos.getItems().get(position);
-                dataBind(String.valueOf(info.getWeight()),info.getBmi(),info.getShape());
+                dataBind(String.valueOf(info.getWeight()),info.getBmi()+"",info.getShape());
             }
 
             @Override

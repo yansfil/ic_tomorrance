@@ -139,7 +139,8 @@
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
 
-        <activity android:name=".Main2Activity">
+        <activity android:name=".Exercise.VideoDialog"
+            android:theme="@style/Theme.Transparent">
 
         </activity>
     </application>

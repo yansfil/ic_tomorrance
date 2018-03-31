@@ -27,17 +27,17 @@ public class Item {
     @SerializedName("deviceid")
     @Expose
     private Integer deviceid;
-    @SerializedName("timestamp")
+    @SerializedName("time")
     @Expose
     private String timestamp;
 
     @SerializedName("bmi")
     @Expose
-    private String bmi;
+    private float bmi;
 
     @SerializedName("whr")
     @Expose
-    private String whr;
+    private float whr;
 
     @SerializedName("shape")
     @Expose
@@ -99,19 +99,19 @@ public class Item {
         this.timestamp = timestamp;
     }
 
-    public String getBmi() {
+    public float getBmi() {
         return bmi;
     }
 
-    public void setBmi(String bmi) {
+    public void setBmi(float bmi) {
         this.bmi = bmi;
     }
 
-    public String getWhr() {
+    public float getWhr() {
         return whr;
     }
 
-    public void setWhr(String whr) {
+    public void setWhr(float whr) {
         this.whr = whr;
     }
 

@@ -110,7 +110,16 @@ public class StatusActivity extends BackActionBarActivity {
         binding.tvPrevMidthigh.setText(data.get(1).getSize().getMidThigh()+"cm");
         binding.tvPrevCalf.setText(data.get(1).getSize().getCalf()+"cm");
 
+        //Analys Setting
+        binding.tvShape.setText(data.get(0).getShape());
+        binding.tvObesity.setText(getDegreeOfObesity(data.get(0).getBmi())+"("+data.get(0).getBmi()+")");
         binding.tvChanged.setText(getMostChangedPart(data));
+        int weightVariation = data.get(0).getWeight()-data.get(1).getWeight();
+        if(weightVariation<=0){
+            binding.tvVariation.setText(weightVariation+"kg");
+        }else{
+            binding.tvVariation.setText("+"+weightVariation+"kg");
+        }
     }
 
     private void putFirstData(Item data){
@@ -121,6 +130,10 @@ public class StatusActivity extends BackActionBarActivity {
         binding.tvHip.setText(data.getSize().getHip()+"cm");
         binding.tvMidthigh.setText(data.getSize().getMidThigh()+"cm");
         binding.tvCalf.setText(data.getSize().getCalf()+"cm");
+
+        //Analys Setting
+        binding.tvShape.setText(data.getShape());
+        binding.tvObesity.setText(getDegreeOfObesity(data.getBmi())+"("+data.getBmi()+")");
     }
 
     private void setFirstEnv(){
@@ -145,7 +158,6 @@ public class StatusActivity extends BackActionBarActivity {
             HashMap<String, Float> map = new HashMap<>();
             ValueComparator bvc = new ValueComparator(map);
             TreeMap<String, Float> sorted_map = new TreeMap<>(bvc);
-
             map.put("biacromion", (nowData.getBiacromion() - prevData.getBiacromion()) / prevData.getBiacromion());
             map.put("chest", (nowData.getChest() - prevData.getChest()) / prevData.getChest());
             map.put("upperArm", (nowData.getUpperArm() - prevData.getUpperArm()) / prevData.getUpperArm());
@@ -161,6 +173,19 @@ public class StatusActivity extends BackActionBarActivity {
         }
     }
 
+    private String getDegreeOfObesity(float bmi){
+        String degree = "skinny";
+        if(bmi < 20){
+            degree = "Skinny";
+        }else if(bmi < 25){
+            degree = "Average";
+        }else if(bmi < 30){
+            degree = "Overweight";
+        }else{
+            degree = "Obese";
+        }
+        return degree;
+    }
     class ValueComparator implements Comparator<String> {
         Map<String, Float> base;
 
@@ -171,7 +196,7 @@ public class StatusActivity extends BackActionBarActivity {
         // Note: this comparator imposes orderings that are inconsistent with
         // equals.
         public int compare(String a, String b) {
-            if (base.get(a) <= base.get(b)) {
+            if (base.get(a) >= base.get(b)) {
                 return -1;
             } else {
                 return 1;

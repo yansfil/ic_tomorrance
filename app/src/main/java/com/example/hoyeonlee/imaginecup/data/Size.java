@@ -32,7 +32,8 @@ public class Size {
     private float calf;
 
     public float getBiacromion() {
-        return biacromion;
+        String value = String.format("%.1f",biacromion);
+        return Float.valueOf(value);
     }
 
     public void setBiacromion(float biacromion) {
@@ -40,7 +41,8 @@ public class Size {
     }
 
     public float getChest() {
-        return chest;
+        String value = String.format("%.1f",chest);
+        return Float.valueOf(value);
     }
 
     public void setChest(float chest) {
@@ -48,7 +50,8 @@ public class Size {
     }
 
     public float getUpperArm() {
-        return upperArm;
+        String value = String.format("%.1f",upperArm);
+        return Float.valueOf(value);
     }
 
     public void setUpperArm(float upperArm) {
@@ -56,7 +59,8 @@ public class Size {
     }
 
     public float getWaist() {
-        return waist;
+        String value = String.format("%.1f",waist);
+        return Float.valueOf(value);
     }
 
     public void setWaist(float waist) {
@@ -64,7 +68,8 @@ public class Size {
     }
 
     public float getHip() {
-        return hip;
+        String value = String.format("%.1f",hip);
+        return Float.valueOf(value);
     }
 
     public void setHip(float hip) {
@@ -72,7 +77,8 @@ public class Size {
     }
 
     public float getMidThigh() {
-        return midThigh;
+        String value = String.format("%.1f",midThigh);
+        return Float.valueOf(value);
     }
 
     public void setMidThigh(float midThigh) {
@@ -80,7 +86,8 @@ public class Size {
     }
 
     public float getCalf() {
-        return calf;
+        String value = String.format("%.1f",calf);
+        return Float.valueOf(value);
     }
 
     public void setCalf(float calf) {

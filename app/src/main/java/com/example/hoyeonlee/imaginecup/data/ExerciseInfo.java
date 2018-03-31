@@ -12,7 +12,7 @@ public class ExerciseInfo {
     private Integer code;
     @SerializedName("items")
     @Expose
-    private ArrayList<ExerciseData2> items;
+    private ArrayList<ExerciseData> items;
 
     public Integer getCode() {
         return code;
@@ -22,11 +22,11 @@ public class ExerciseInfo {
         this.code = code;
     }
 
-    public ArrayList<ExerciseData2> getItems() {
+    public ArrayList<ExerciseData> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<ExerciseData2> items) {
+    public void setItems(ArrayList<ExerciseData> items) {
         this.items = items;
     }
 

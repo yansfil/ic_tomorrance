@@ -35,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     EditText pwRe;
     Button joinButton;
     RadioGroup goalGroup;
-    RadioGroup intensityGroup;
     RadioGroup genderGroup;
     TextView login;
     private final int EMAIL_ERROR = 1;
@@ -62,7 +61,6 @@ public class SignUpActivity extends AppCompatActivity {
         joinButton = findViewById(R.id.btn_join);
         login = findViewById(R.id.tv_login);
         goalGroup = findViewById(R.id.group_goal);
-        intensityGroup = findViewById(R.id.group_intensity);
         genderGroup = findViewById(R.id.group_gender);
         apiService = _Application.getInstance().getApiService();
 
@@ -147,20 +145,6 @@ public class SignUpActivity extends AppCompatActivity {
                 goal = "loseWeight";
                 break;
         }
-        switch (intensityGroup.getCheckedRadioButtonId()) {
-            case R.id.intensity1:
-                intensity = "weak";
-                break;
-            case R.id.intensity2:
-                intensity = "moderate";
-                break;
-            case R.id.intensity3:
-                intensity = "strong";
-                break;
-            default:
-                intensity = "weak";
-                break;
-        }
         switch (genderGroup.getCheckedRadioButtonId()) {
             case R.id.gender1:
                 intensity = "man";
@@ -172,7 +156,7 @@ public class SignUpActivity extends AppCompatActivity {
                 intensity = "man";
                 break;
         }
-        Call<LoginResult> join = apiService.join(nameText,heightText,emailText,passwordText,goal,intensity,gender,_Application.getDeviceId());
+        Call<LoginResult> join = apiService.join(nameText,heightText,emailText,passwordText,goal,gender,_Application.getDeviceId(),"");
         join.enqueue(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {

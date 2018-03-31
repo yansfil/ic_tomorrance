@@ -1,13 +1,13 @@
 package com.example.hoyeonlee.imaginecup.Exercise;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.BaseAdapter;
 
 import com.example.hoyeonlee.imaginecup.R;
+import com.example.hoyeonlee.imaginecup.data.ExerciseData;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by hoyeonlee on 2018. 2. 25..
  */
 
-public class ExerciseAdapter extends BaseExpandableListAdapter{
+public class ExerciseAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<ExerciseData> datas;
 
@@ -25,83 +25,33 @@ public class ExerciseAdapter extends BaseExpandableListAdapter{
     }
 
     @Override
-    public int getGroupCount() {
+    public int getCount() {
         return datas.size();
     }
 
     @Override
-    public int getChildrenCount(int groupPosition) {
-        Log.v("EXERCISE_ADAPTER","getChildrenCount");
-        return 1;
+    public Object getItem(int position) {
+        return datas.get(position);
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
-        return datas.get(groupPosition).getParentData();
+    public long getItemId(int position) {
+        return position;
     }
 
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return datas.get(groupPosition).getChildData() ;
-    }
+    ExerciseHolder holder;
 
     @Override
-    public long getGroupId(int groupPosition) {
-        return 0;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    ParentHolder holder;
-    ChildHolder childHolder;
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        if(convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exercise,parent,false);
-            holder = new ParentHolder(convertView);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exercise, parent, false);
+            holder = new ExerciseHolder(convertView);
             convertView.setTag(holder);
-        }else{
-            holder = (ParentHolder) convertView.getTag();
+        } else {
+            holder = (ExerciseHolder) convertView.getTag();
         }
-        holder.setData(datas.get(groupPosition).getParentData());
-        Log.v("EXERCISE_ADAPTER",groupPosition+"parent");
+        holder.setData(datas.get(position));
         return convertView;
     }
 
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if(convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exercise_child,parent,false);
-            childHolder = new ChildHolder(convertView);
-            convertView.setTag(childHolder);
-        }else{
-            childHolder = (ChildHolder) convertView.getTag();
-        }
-        childHolder.setData(datas.get(groupPosition).getChildData());
-        Log.v("EXERCISE_ADAPTER",childPosition+"child");
-        return convertView;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
 }

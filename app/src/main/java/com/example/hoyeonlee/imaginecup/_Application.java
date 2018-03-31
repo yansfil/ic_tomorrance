@@ -24,7 +24,7 @@ public class _Application extends Application{
     public void onCreate() {
         super.onCreate();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/yoon.ttf")
+                .setDefaultFontPath("fonts/NotoSansCJKjp-DemiLight.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );

@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.hoyeonlee.imaginecup.data.ExerciseData2;
+import com.example.hoyeonlee.imaginecup.data.ExerciseData;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 
 public class Exercise2Adapter extends BaseAdapter{
-    ArrayList<ExerciseData2> data;
+    ArrayList<ExerciseData> data;
     Context context;
-    public Exercise2Adapter(ArrayList<ExerciseData2> data, Context context) {
+    public Exercise2Adapter(ArrayList<ExerciseData> data, Context context) {
         this.data = data;
         this.context = context;
     }

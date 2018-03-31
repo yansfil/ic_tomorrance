@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.hoyeonlee.imaginecup.R;
-import com.example.hoyeonlee.imaginecup.data.ExerciseData2;
+import com.example.hoyeonlee.imaginecup.data.ExerciseData;
 
 /**
  * Created by hoyeonlee on 2018. 3. 26..
@@ -32,7 +32,7 @@ public class ExerciseGridItem extends LinearLayout {
         numberView = view.findViewById(R.id.tv_number);
         imageView = view.findViewById(R.id.iv_exercise);
     }
-    public void setData(ExerciseData2 data){
+    public void setData(ExerciseData data){
         titleView.setText(data.getTitle());
         numberView.setText(data.getNumber());
         Glide.with(context).load(data.getImage())

@@ -44,7 +44,7 @@ public class MyHandler extends NotificationsHandler {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.main_view)
                         .setAutoCancel(true)
                         .setContentTitle("NunBody")
                         .setStyle(new NotificationCompat.BigTextStyle()

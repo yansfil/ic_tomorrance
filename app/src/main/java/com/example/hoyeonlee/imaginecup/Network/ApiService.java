@@ -18,7 +18,7 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
-    public static final String URL = "http://172.24.121.101:3000";
+    public static final String URL = "https://tomorrances.azurewebsites.net";
     @FormUrlEncoded
     @POST("/client/login")
     Call<LoginResult> login(@Field("email") String email, @Field("password") String password, @Field("pushid") String clientId);

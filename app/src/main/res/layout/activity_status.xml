@@ -80,10 +80,10 @@
                             android:layout_marginLeft="5dp"
                             android:gravity="center_vertical|center"
                             android:padding="0dp"
-                            android:textSize="12sp"
+                            android:text="Previous Status"
 
-                            android:text="previous status"
-                            android:textColor="@color/text_color_soft" />
+                            android:textColor="@color/text_color_soft"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -107,10 +107,10 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:gravity="center_vertical|center"
-                            android:textSize="12sp"
                             android:padding="0dp"
-                            android:text="now status"
-                            android:textColor="@color/text_color_soft" />
+                            android:text="Current Status"
+                            android:textColor="@color/text_color_soft"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <TextView
@@ -146,31 +146,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="142dp"
+                        android:layout_marginTop="140dp"
                         android:orientation="vertical"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_prev_biacromion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
                             android:id="@+id/tv_biacromion"
                             android:layout_width="wrap_content"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
                             android:text="cm"
-                            android:textColor="@color/colorPrimary_green"
-                            android:textSize="17sp" />
+                            android:textColor="@color/greeny_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -185,13 +189,13 @@
 
                         <TextView
                             android:id="@+id/tv_prev_chest"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
@@ -199,10 +203,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="cm"
-                            android:textColor="@color/colorPrimary_green"
-                            android:textSize="17sp" />
+                            android:textColor="@color/greeny_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -217,13 +221,13 @@
 
                         <TextView
                             android:id="@+id/tv_prev_hip"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
@@ -231,10 +235,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="cm"
-                            android:textColor="@color/colorPrimary_green"
-                            android:textSize="17sp" />
+                            android:textColor="@color/greeny_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -249,13 +253,13 @@
 
                         <TextView
                             android:id="@+id/tv_prev_calf"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
@@ -263,10 +267,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="left|center_vertical"
                             android:text="cm"
-                            android:textColor="@color/colorPrimary_green"
-                            android:textSize="17sp" />
+                            android:textColor="@color/greeny_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -281,13 +285,13 @@
 
                         <TextView
                             android:id="@+id/tv_prev_upperarm"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
@@ -295,10 +299,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:text="cm"
                             android:textColor="@color/greeny_blue"
-                            android:textSize="17sp" />
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -313,13 +317,13 @@
 
                         <TextView
                             android:id="@+id/tv_prev_waist"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
@@ -327,10 +331,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:text="cm"
-                            android:textColor="@color/colorPrimary_green"
-                            android:textSize="17sp" />
+                            android:textColor="@color/greeny_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -345,13 +349,13 @@
 
                         <TextView
                             android:id="@+id/tv_prev_midthigh"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:text="cm"
                             android:textColor="@color/gray"
-                            android:textSize="17sp"
+                            android:textSize="13sp"
                             android:visibility="visible" />
 
                         <TextView
@@ -359,10 +363,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:text="cm"
-                            android:textColor="@color/colorPrimary_green"
-                            android:textSize="17sp" />
+                            android:textColor="@color/greeny_blue"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -392,8 +396,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="right"
-                                android:text="Advanced upper body"
+                                android:gravity="center"
+                                android:text="Slightly Advanced upper body"
                                 android:textColor="@color/greeny_blue"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -408,8 +412,8 @@
                                 android:id="@+id/textView4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textgray"
-                                android:text="Degree of obesity(BMI)" />
+                                android:text="Degree of Obesity(BMI)"
+                                android:textColor="@color/textgray" />
 
                             <TextView
                                 android:id="@+id/tv_obesity"
@@ -419,7 +423,7 @@
                                 android:gravity="center"
                                 android:text="23"
                                 android:textColor="@color/greeny_blue"
-                                android:textSize="18sp" />
+                                android:textSize="16sp" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -457,8 +461,8 @@
                                 android:id="@+id/textView16"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/textgray"
-                                android:text="Weight variation" />
+                                android:text="Weight Variation"
+                                android:textColor="@color/textgray" />
 
                             <TextView
                                 android:id="@+id/tv_variation"
@@ -469,92 +473,12 @@
                                 android:paddingLeft="45dp"
                                 android:text="0"
                                 android:textColor="@color/greeny_blue"
-                                android:textSize="18sp" />
+                                android:textSize="16sp" />
                         </LinearLayout>
 
 
                     </LinearLayout>
 
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/linearLayout2"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="16dp"-->
-                        <!--android:gravity="center_vertical"-->
-                        <!--android:orientation="horizontal"-->
-                        <!--app:layout_constraintBottom_toTopOf="@+id/linearLayout"-->
-                        <!--app:layout_constraintTop_toBottomOf="@id/imageView3"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--app:layout_constraintLeft_toLeftOf="parent">-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/tv_status_name"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="right"-->
-                            <!--android:textSize="13dp" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/tv_status_shape"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="0"-->
-                            <!--android:gravity="left"-->
-                            <!--android:textColor="@color/greeny_blue"-->
-                            <!--android:textSize="18dp" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/textView82"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="left"-->
-                            <!--android:text="으로,"-->
-                            <!--android:textSize="13dp" />-->
-
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/linearLayout"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:gravity="center_vertical"-->
-                        <!--android:orientation="horizontal"-->
-                        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--app:layout_constraintLeft_toLeftOf="@+id/linearLayout2">-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/textView7"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="right"-->
-                            <!--android:text="유사 체형 대비"-->
-                            <!--android:textSize="13dp" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/textView9"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_marginRight="5dp"-->
-                            <!--android:layout_weight="0"-->
-                            <!--android:gravity="left"-->
-                            <!--android:textColor="@color/greeny_blue"-->
-                            <!--android:textSize="18dp" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/textView8"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="left"-->
-                            <!--android:text=" 입니다"-->
-                            <!--android:textSize="13dp" />-->
-                    <!--</LinearLayout>-->
                 </android.support.constraint.ConstraintLayout>
 
 
