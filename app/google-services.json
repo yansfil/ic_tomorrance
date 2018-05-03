@@ -8,6 +8,37 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:596996598067:android:9502e0271111f60f",
+        "android_client_info": {
+          "package_name": "com.e.x"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596996598067-llbha9ocdps63hi1ne4s8gi3rk991kli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJA2YhMS87f3vzmZg8Egql78R0nhvSJr0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:596996598067:android:ceb68308db8a426f",
         "android_client_info": {
           "package_name": "com.example.hoyeonlee.imaginecup"
@@ -40,6 +71,13 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "596996598067-58h5so54gipdni9ejb6jadmgnscrqgvn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ex.ks"
+              }
+            },
+            {
               "client_id": "596996598067-llbha9ocdps63hi1ne4s8gi3rk991kli.apps.googleusercontent.com",
               "client_type": 3
             }
@@ -55,6 +93,37 @@
         "mobilesdk_app_id": "1:596996598067:android:7558e0fe67c4b916",
         "android_client_info": {
           "package_name": "com.example.hoyeonlee.retrofitExample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596996598067-llbha9ocdps63hi1ne4s8gi3rk991kli.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJA2YhMS87f3vzmZg8Egql78R0nhvSJr0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596996598067:android:52979b63b7033a02",
+        "android_client_info": {
+          "package_name": "com.tomorrance.yonsei.tomo"
         }
       },
       "oauth_client": [

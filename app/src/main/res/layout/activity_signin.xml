@@ -75,10 +75,9 @@
                     android:background="@drawable/layer_textarea"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint=""
+                    android:hint="email"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
-                    android:text="test1@imaginecup.com"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -108,7 +107,6 @@
                     android:hint="password"
                     android:inputType="textPassword"
                     android:paddingLeft="10dp"
-                    android:text="123456"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -136,26 +134,28 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Social Login"
-                android:id="@+id/textView"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
-                android:textSize="10sp" />
+                android:text="Social Login"
+                android:textSize="10sp"
+                android:visibility="gone" />
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/btn_naver"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/layer_login_naver"
-                android:id="@+id/btn_naver">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
+                    android:id="@+id/imageView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView19"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp" />
 
@@ -169,21 +169,23 @@
                     android:gravity="center"
                     android:text="Naver Login"
                     android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/btn_facebook"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/layer_login_facebook"
-                android:id="@+id/btn_facebook">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
+                    android:id="@+id/imageView46"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView46"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp" />
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.hoyeonlee.imaginecup">
+    package="com.tomorrance.yonsei.tomo">
 
     <meta-data
         android:name="com.google.android.gms.version"
@@ -40,7 +40,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-        android:name="._Application"
+        android:name="com.tomorrance.yonsei.tomo._Application"
         android:allowBackup="true"
         android:icon="@drawable/main_view"
         android:label="@string/app_name"
@@ -49,19 +49,19 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar"
         tools:replace="android:icon">
-        <activity android:name=".Login.SigninActivity">
+        <activity android:name="com.tomorrance.yonsei.tomo.Login.SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.SignUpActivity"></activity>
-        <activity android:name=".Exercise.Exercise2Activity">
+        <activity android:name="com.tomorrance.yonsei.tomo.Login.SignUpActivity"></activity>
+        <activity android:name="com.tomorrance.yonsei.tomo.Exercise.Exercise2Activity">
 
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ViewModel.ViewerActivity">
+        <activity android:name="com.tomorrance.yonsei.tomo.MainActivity"></activity>
+        <activity android:name="com.tomorrance.yonsei.tomo.ViewModel.ViewerActivity">
             <intent-filter>
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
@@ -105,20 +105,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QrScan.barcode.BarcodeCaptureActivity"
+            android:name="com.tomorrance.yonsei.tomo.QrScan.barcode.BarcodeCaptureActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".History.HistoryActivity"></activity>
-        <activity android:name=".Status.StatusActivity"></activity>
-        <activity android:name=".Exercise.ExerciseActivity"></activity>
+        <activity android:name="com.tomorrance.yonsei.tomo.History.HistoryActivity"></activity>
+        <activity android:name="com.tomorrance.yonsei.tomo.Status.StatusActivity"></activity>
+        <activity android:name="com.tomorrance.yonsei.tomo.Exercise.ExerciseActivity"></activity>
 
         <!-- Push Notification Setting -->
-        <service android:name=".Notification.MyInstanceIDService">
+        <service android:name="com.tomorrance.yonsei.tomo.Notification.MyInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".Notification.RegistrationIntentService"
+            android:name="com.tomorrance.yonsei.tomo.Notification.RegistrationIntentService"
             android:exported="false"></service>
 
         <receiver
@@ -127,7 +127,7 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="com.example.hoyeonlee.imaginecup" />
+                <category android:name="com.tomorrance.yonsei.tomo" />
             </intent-filter>
         </receiver>
 
@@ -139,7 +139,7 @@
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
 
-        <activity android:name=".Exercise.VideoDialog"
+        <activity android:name="com.tomorrance.yonsei.tomo.Exercise.VideoDialog"
             android:theme="@style/Theme.Transparent">
 
         </activity>
